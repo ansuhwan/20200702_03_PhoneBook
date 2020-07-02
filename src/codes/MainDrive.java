@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
+import codes.datas.User;
+
 public class MainDrive {
 
 	public static void main(String[] args) {
@@ -52,8 +54,8 @@ public class MainDrive {
 
 			} else {
 //				0,1,2,외의 값이 들어온 경우 대응.
-				System.out.println("잘못된 입력");
-				System.out.println("다시 입력");
+				System.out.println("잘못된 입력헀습니다");
+				System.out.println("다시 입력해 주세요");
 			}
 		}
 
@@ -109,21 +111,12 @@ public class MainDrive {
 //				나이는 저장 하고 계산 =>int
 //				string =>int로
 				int userBirthYear = Integer.parseInt(userInfos[2]);
-
-//				생년을 나이로 계산 => 매년 정확한 나이가 나오도록
-
-//				켈린더 객체 생성 => 현재 시간이 기본으로 들오감.
-				Calendar now = Calendar.getInstance();
-
-//				년도를 현ㅐ 날짜에서ㅏ get(Calender.Year)로 뽑자
-				int userAge = now.get(Calendar.YEAR) - userBirthYear + 1;
-
-//				세개의 데이터를 가지고 양식을 가공
-//				조경진 (33) : 010-5112-3237양식으로 가공
-
-				String userInfoMessage = String.format("%s(%d세) : %s", userName, userAge, userphoneNum);
-				System.out.println(userInfoMessage);
-
+				
+//				이름/번호/나이 를 가지고 =>user 객체 만들기
+				User user = new User(userName, userphoneNum, userBirthYear);
+				
+//				만들어낸 유저 출력
+				System.out.println(user);
 			}
 //			while 빠져나옴 : 파일을 다 읽어서 빠져나옴
 //			파일 사용을 종료 br fr를 닫자
