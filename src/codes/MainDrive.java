@@ -6,16 +6,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FilterReader;
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import codes.datas.User;
 
 public class MainDrive {
+
+//	불러온 연락처 저장할 ArrayList
+//	static메쏘드에서도 사용하력ㅎ static 키워드
+	static List<User> myUserList = new ArrayList<>();
 
 	public static void main(String[] args) {
 
@@ -63,6 +65,11 @@ public class MainDrive {
 
 //	파일에 저장된 전화 번호 목록 출력
 	public static void readAllPhoneNum() {
+		
+//		파일에서 내 연락처 불러올 예정
+//		myUserList에서 이미 데이터가 있으단
+//		[전부다지우고] 다시 불러오게 하자
+		myUserList.clear();
 
 //		파일에 저장된 데이터 -> 자바 프로그램에서 활용 (flie )
 //		FlieReader/BufferedReader 이용
@@ -118,6 +125,12 @@ public class MainDrive {
 //				만들어낸 유저 출력 => User 클래ㅔ스 toString 오버라이딩
 //				양식으로ㅓ
 				System.out.println(user);
+				
+//				맴버변수로 만든 내 연락처 목록에 user변수 추가
+				myUserList.add(user);
+				
+				
+				
 			}
 //			while 빠져나옴 : 파일을 다 읽어서 빠져나옴
 //			파일 사용을 종료 br fr를 닫자
@@ -132,10 +145,13 @@ public class MainDrive {
 
 //			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("읽어오던중 문제 발생");
 			e.printStackTrace();
 		}
-
+		
+		System.out.printf("저장된 연락처 갯수 : %d개",myUserList.size());
+		
+		
 	}
 
 //	전화번호 +이름 + 생년 정보 저장 기능.
