@@ -35,7 +35,8 @@ public class MainDrive {
 				System.out.println("전화 번호부를 종료 합니다..");
 				break;
 			} else if (inputMenu == 1) {
-//				전화 번호 추가 기능 구현
+//				전화 번호 기능 실행
+				addPhoneNumToFile();
 			} else if (inputMenu == 2) {
 //				전화ㅣ 번호 전체 조회
 
@@ -44,6 +45,32 @@ public class MainDrive {
 				System.out.println("다시 입력");
 			}
 		}
+
+	}
+	
+	
+//	전화번호 +이름 + 생년 정보 저장 기능.
+	public static void addPhoneNumToFile() {
+		
+//		저장할 데이터를 입력 받자
+		Scanner myScan =new Scanner(System.in);
+		
+//		이름String ->폰번String -> 생년int
+		
+		System.out.println("이름 입력 :");
+		String name =myScan.nextLine();
+		
+		System.out.println("전화 번호 입력 :");
+		String phoneNum = myScan.nextLine();
+		
+		System.out.println("생년 입력 :");
+		int birtnYear = myScan.nextInt();
+		
+//		변수에 저장한 데이터를 뭈어서 파일로 저장
+//		자바에 보조기억장치 내보내기 파일 출력 (SAVE)
+		
+		
+		
 
 	}
 
