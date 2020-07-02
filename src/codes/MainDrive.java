@@ -115,7 +115,8 @@ public class MainDrive {
 //				이름/번호/나이 를 가지고 =>user 객체 만들기
 				User user = new User(userName, userphoneNum, userBirthYear);
 				
-//				만들어낸 유저 출력
+//				만들어낸 유저 출력 => User 클래ㅔ스 toString 오버라이딩
+//				양식으로ㅓ
 				System.out.println(user);
 			}
 //			while 빠져나옴 : 파일을 다 읽어서 빠져나옴
