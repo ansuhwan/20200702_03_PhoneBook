@@ -1,5 +1,9 @@
 package codes;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
@@ -47,30 +51,60 @@ public class MainDrive {
 		}
 
 	}
-	
-	
+
 //	전화번호 +이름 + 생년 정보 저장 기능.
 	public static void addPhoneNumToFile() {
-		
+
 //		저장할 데이터를 입력 받자
-		Scanner myScan =new Scanner(System.in);
-		
+		Scanner myScan = new Scanner(System.in);
+
 //		이름String ->폰번String -> 생년int
-		
+
 		System.out.println("이름 입력 :");
-		String name =myScan.nextLine();
-		
+		String name = myScan.nextLine();
+
 		System.out.println("전화 번호 입력 :");
 		String phoneNum = myScan.nextLine();
-		
+
 		System.out.println("생년 입력 :");
 		int birtnYear = myScan.nextInt();
-		
+
 //		변수에 저장한 데이터를 뭈어서 파일로 저장
 //		자바에 보조기억장치 내보내기 파일 출력 (SAVE)
-		
-		
-		
+
+//		어느 파일을 이용할껀지 파일명
+		File phoneBookFile = new File("phoneBook.txt");
+
+//		파일 저장 파일 쓰기
+//		파일에 사용자 정보 저장 =>기존에 내용 이어 붙이기 true 의 역할
+		try {
+			FileWriter fw = new FileWriter(phoneBookFile, true);
+
+//			fw는 개발자가 다루기 불편하다 => 보조보구로 쓰는게 fw
+			BufferedWriter bw = new BufferedWriter(fw);
+
+//			실제로 bw를 이용하서 연락처 정보 저장.
+
+//			3가지 정보를 한줄에 묶어서 저장 
+//			ex 조경진 ,010-5112-3237 , 1988 => 한줄짜리 String로 저ㅏ장
+			String infoStr = String.format("%s,%s,%d", name, phoneNum, birtnYear);
+
+//			묶인 한줄을 파일에 기록
+			bw.append(infoStr);
+//			파일을 기록 하고 나면 줄이 바뀌지 않는다 =>System.out.println처럼
+//			한줗에 한명씪 =< 줄 바꾸자
+			bw.newLine();
+
+//			작업을 완료 => 열어둔 bw, fw 닫자
+			bw.close();
+			fw.close();
+
+			System.out.println("연락처 저장이 완료 되었습니다");
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
