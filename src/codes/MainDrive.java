@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilterReader;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Scanner;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
@@ -34,7 +35,7 @@ public class MainDrive {
 			System.out.println("=====================");
 
 //			실제 메뉴 입력 받기
-			System.out.println("메뉴 선택 :");
+			System.out.print("메뉴 선택 :");
 			int inputMenu = myScan.nextInt();
 
 //			입력값 확인
@@ -92,7 +93,36 @@ public class MainDrive {
 //				이줄의 코드가 실행된다 : break를 안만남
 //				실제로 파일에 적혀있던 한줄이 line에 담겨있다
 
-				System.out.println(line);
+//				System.out.println(line);
+
+//				사용자 정보 가공해서 출력하기
+//				조경진 (33) : 010-5112-3237양식으로 가공
+
+//				사용자의 이름과 번호 와 나이를 분리해서 변수로 저장하자
+
+//				String 클래스의 split 기능으로 정보항목들을 (, 기준으로) 분리
+				String[] userInfos = line.split(",");
+
+//				이름/번호. 나이
+				String userName = userInfos[0];
+				String userphoneNum = userInfos[1];
+//				나이는 저장 하고 계산 =>int
+//				string =>int로
+				int userBirthYear = Integer.parseInt(userInfos[2]);
+
+//				생년을 나이로 계산 => 매년 정확한 나이가 나오도록
+
+//				켈린더 객체 생성 => 현재 시간이 기본으로 들오감.
+				Calendar now = Calendar.getInstance();
+
+//				년도를 현ㅐ 날짜에서ㅏ get(Calender.Year)로 뽑자
+				int userAge = now.get(Calendar.YEAR) - userBirthYear + 1;
+
+//				세개의 데이터를 가지고 양식을 가공
+//				조경진 (33) : 010-5112-3237양식으로 가공
+
+				String userInfoMessage = String.format("%s(%d세) : %s", userName, userAge, userphoneNum);
+				System.out.println(userInfoMessage);
 
 			}
 //			while 빠져나옴 : 파일을 다 읽어서 빠져나옴
