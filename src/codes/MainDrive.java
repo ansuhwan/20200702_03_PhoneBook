@@ -1,8 +1,12 @@
 package codes;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilterReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -43,11 +47,69 @@ public class MainDrive {
 				addPhoneNumToFile();
 			} else if (inputMenu == 2) {
 //				전화ㅣ 번호 전체 조회
+				readAllPhoneNum();
 
 			} else {
+//				0,1,2,외의 값이 들어온 경우 대응.
 				System.out.println("잘못된 입력");
 				System.out.println("다시 입력");
 			}
+		}
+
+	}
+
+//	파일에 저장된 전화 번호 목록 출력
+	public static void readAllPhoneNum() {
+
+//		파일에 저장된 데이터 -> 자바 프로그램에서 활용 (flie )
+//		FlieReader/BufferedReader 이용
+
+//		볼러올 파일의 위치 저정
+		File flie = new File("phoneBook.txt");
+
+		try {
+//			파일을 실제로 불러오는 클래스
+			FileReader fr = new FileReader(flie);
+
+//			한줄씪 한꺼번에 불러오게 하는 클래스 => fr은 한글자씩 fr을 보조해서 한문장으로 
+			BufferedReader br = new BufferedReader(fr);
+
+//			모든 연락처를 불러오기 반복
+
+			while (true) {
+
+//				한 줄 통째로 =>IOException처리
+				String line = br.readLine();
+
+				if (line == null) {
+//					더이상 불러올 내용이 없어서 null이 들어옴
+//					다 읽았더=> 무한 반복 탈출
+
+					System.out.println("연락처를 모두 읽어왔습니다");
+					break;
+
+				}
+//				이줄의 코드가 실행된다 : break를 안만남
+//				실제로 파일에 적혀있던 한줄이 line에 담겨있다
+
+				System.out.println(line);
+
+			}
+//			while 빠져나옴 : 파일을 다 읽어서 빠져나옴
+//			파일 사용을 종료 br fr를 닫자
+			br.close();
+			fr.close();
+
+		} catch (FileNotFoundException e) {
+
+//			읽어올 파일이 없는 경우
+			System.out.println("불러올 파일이 없습니다");
+			System.out.println("연락처를 저장하고 다시 시도해주세요");
+
+//			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -60,13 +122,13 @@ public class MainDrive {
 
 //		이름String ->폰번String -> 생년int
 
-		System.out.println("이름 입력 :");
+		System.out.print("이름 입력 :");
 		String name = myScan.nextLine();
 
-		System.out.println("전화 번호 입력 :");
+		System.out.print("전화 번호 입력 :");
 		String phoneNum = myScan.nextLine();
 
-		System.out.println("생년 입력 :");
+		System.out.print("생년 입력 :");
 		int birtnYear = myScan.nextInt();
 
 //		변수에 저장한 데이터를 뭈어서 파일로 저장
